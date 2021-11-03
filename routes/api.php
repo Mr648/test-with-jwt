@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::prefix('auth')
-    ->middleware('api')
     ->group(function () {
         Route::post('/login', [AuthController::class, 'login'])->name('login');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -28,6 +27,6 @@ Route::prefix('auth')
         Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     });
 
-//Route::middleware('auth:api')->group(function ($router) {
+Route::middleware('auth:api')->group(function ($router) {
     Route::resource('authors', AuthorController::class);
-//});
+});
