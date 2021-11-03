@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthController extends AuthenticatorController
 {
     public function __construct()
     {
-        $this->middleware('auth:api')
-            ->except(['login', 'register']);
+        parent::__construct(['login', 'register']);
     }
 
     /**

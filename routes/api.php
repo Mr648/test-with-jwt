@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')
     ->middleware('api')
     ->group(function () {
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/refresh', [AuthController::class, 'refresh']);
-        Route::get('/profile', [AuthController::class, 'profile']);
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     });
+
+//Route::middleware('auth:api')->group(function ($router) {
+    Route::resource('authors', AuthorController::class);
+//});
