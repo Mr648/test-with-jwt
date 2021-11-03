@@ -19,8 +19,8 @@ class BookResource extends JsonResource
             'name' => $this->name,
             'pages' => $this->pages,
             'publisher' => $this->publisher,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->format('M,d,Y h:i:s'),
+            'updated_at' => $this->updated_at->format('M,d,Y h:i:s'),
             $this->mergeWhen($this->resource->relationLoaded('author'), [
                 'author' => AuthorResource::make($this->whenLoaded('author'))
             ])

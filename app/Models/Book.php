@@ -16,10 +16,6 @@ class Book extends Model
         'author_id',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime:m,d,Y H:i:s',
-    ];
-
     /**
      * Gets the author of the book.
      *
