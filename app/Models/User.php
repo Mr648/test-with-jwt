@@ -66,6 +66,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function getFullNameAttribute()
+    {
+        return rtrim(ltrim(sprintf('%s %s', $this->name, $this->family)));
+    }
+
     public function books()
     {
         return $this->hasMany(Book::class, 'author_id');
