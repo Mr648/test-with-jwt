@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::prefix('auth')
         Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     });
 
-Route::middleware('auth:api')->group(function ($router) {
+Route::middleware('auth:api','role:admin')->group(function ($router) {
     Route::resource('authors', AuthorController::class);
+    Route::resource('books', BookController::class);
 });

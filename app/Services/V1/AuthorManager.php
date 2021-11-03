@@ -22,19 +22,14 @@ class AuthorManager extends AuthorService
         parent::__construct(User::class);
     }
 
-    public function getBaseQuery()
-    {
-        return $this->model::with('books')->withCount('books');
-    }
-
     public function list(Request $request)
     {
-        return AuthorResource::collection($this->getBaseQuery()->get());
+        return AuthorResource::collection($this->getBaseQuery(['books'], ['books'])->get());
     }
 
     public function show(Request $request, $id)
     {
-        return AuthorResource::make($this->getBaseQuery()->findOrFail($id));
+        return AuthorResource::make($this->getBaseQuery(['books'], ['books'])->findOrFail($id));
     }
 
     public function validateInputs(Request $request, $authorId = null)

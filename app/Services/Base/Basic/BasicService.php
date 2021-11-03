@@ -12,4 +12,9 @@ class BasicService
     {
         $this->model = $class;
     }
+
+    public function getBaseQuery($with = [], $withCount=[])
+    {
+        return $this->model::with($with)->withCount($withCount);
+    }
 }
