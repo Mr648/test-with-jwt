@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Auth\AuthenticatorController;
-use App\Http\Controllers\Controller;
 use App\Services\Base\AuthorService;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class AuthorController extends AuthenticatorController
 
     public function __construct(AuthorService $service)
     {
-        parent::__construct();
+        parent::__construct(['index', 'show']);
         $this->authors = $service;
     }
 
