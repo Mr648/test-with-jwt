@@ -39,21 +39,21 @@ class BookController extends AuthenticatorController
      */
     public function show(Request $request, $book)
     {
-        return $this->books->show($request,$book);
+        return $this->books->show($request, $book);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $book)
     {
-        return $this->books->update($request,$book);
+        return $this->books->update($request, $book);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy($book)
     {
         return $this->books->destroy($book);
     }

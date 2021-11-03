@@ -110,7 +110,7 @@ class AuthorManager extends AuthorService
         return response()->json([
             'message' => 'Author successfully updated',
             'author' => AuthorResource::make($author)
-        ], 201);
+        ]);
     }
 
     public function destroy($id)
@@ -123,6 +123,6 @@ class AuthorManager extends AuthorService
         $author->delete();
         return response()->json([
             'message' => 'Author successfully deleted',
-        ], 200);
+        ]);
     }
 }
