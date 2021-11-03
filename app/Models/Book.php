@@ -14,4 +14,18 @@ class Book extends Model
         'pages',
         'publisher',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:m,d,Y H:i:s',
+    ];
+
+    /**
+     * Gets the author of the book.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }
