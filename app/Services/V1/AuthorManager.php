@@ -5,11 +5,14 @@ namespace App\Services\V1;
 
 
 use App\Http\Resources\AuthorResource;
+use App\Mail\AuthorCreated;
 use App\Models\Enums\Roles;
 use App\Models\User;
 use App\Services\Base\AuthorService;
+use App\Traits\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -17,6 +20,9 @@ use Illuminate\Validation\ValidationException;
 
 class AuthorManager extends AuthorService
 {
+
+    use Administrator;
+
     public function __construct()
     {
         parent::__construct(User::class);
@@ -76,6 +82,9 @@ class AuthorManager extends AuthorService
             'role' => Roles::AUTHOR,
             'password' => bcrypt($request->get('password'))
         ]);
+
+        // sending an email to admin
+        Mail::to($this->getAdministrator())->send(new AuthorCreated($author));
 
         return response()->json([
             'message' => 'Author successfully created',

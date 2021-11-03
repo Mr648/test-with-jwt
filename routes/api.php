@@ -28,8 +28,9 @@ Route::prefix('auth')
         Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     });
 
-Route::middleware('auth:api', 'role:admin')->prefix('admin')->group(function ($router) {
+Route::middleware(['auth:api', 'role:admin'])->prefix('admin')->group(function ($router) {
     Route::resource('authors', AuthorController::class);
     Route::resource('books', BookController::class);
 });
+
 Route::resource('/authors', AuthorController::class);
